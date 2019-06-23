@@ -38,6 +38,15 @@ body {
   height: 400px;
   width: 300px;
   background-color: orange;
+  overflow-y: scroll;
+}
+
+.market-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  border-bottom: 1px solid black;
 }
 
 #goto-network-view {
