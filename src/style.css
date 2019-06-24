@@ -35,7 +35,7 @@ body {
 }
 
 #market {
-  height: 400px;
+  height: 600px;
   width: 300px;
   background-color: orange;
   overflow-y: scroll;
@@ -47,12 +47,6 @@ body {
   align-items: center;
   height: 80px;
   border-bottom: 1px solid black;
-}
-
-#goto-network-view {
-  height: 200px;
-  width: 300px;
-  background-color: orangered;
 }
 
 #screen-right {
