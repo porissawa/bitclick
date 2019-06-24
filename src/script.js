@@ -25,57 +25,55 @@ const quantumCounter = document.querySelector('.buy-quantum > span');
 const upgradesDiv = document.querySelector('.market-upgrades');
 let upgradeItems = document.querySelectorAll('.upgrade-item');
 
-const structureSpace = document.getElementById('structures');
-
 // objects
 const structures = {
   toaster: {
     name: 'toaster',
     baseGen: 1,
     genMultiplier: 1,
-    baseCost: 10,
+    baseCost: 15,
     text: 'Who knew we\'d ever need internet connected toasters?',
-    currOwned: 0,
+    img: '../assets/imgs/structures_toaster.png',
   },
   mobile: {
     name: 'mobile',
-    baseGen: 10,
+    baseGen: 8,
     genMultiplier: 1,
-    baseCost: 1000,
+    baseCost: 100,
     text: 'Ring ring, who\'s there?',
-    currOwned: 0,
+    img: '../assets/imgs/structure_mobile.png',
   },
   computer: {
     name: 'computer',
-    baseGen: 100,
+    baseGen: 47,
     genMultiplier: 1,
-    baseCost: 10000,
+    baseCost: 1100,
     text: 'Another computer to your collection.',
-    currOwned: 0,
+    img: '../assets/imgs/structures_computer.png',
   },
   server: {
     name: 'server',
-    baseGen: 1000,
+    baseGen: 260,
     genMultiplier: 1,
-    baseCost: 100000,
+    baseCost: 12000,
     text: 'LOREM IPSUM THINK OF SOMETHING DOLOR AMET',
-    currOwned: 0,
+    img: '../assets/imgs/structures_server.png',
   },
   supercomputer: {
     name: 'supercomputer',
-    baseGen: 10000,
+    baseGen: 1400,
     genMultiplier: 1,
-    baseCost: 10000000,
+    baseCost: 130000,
     text: 'Like Auntie, but its hashes are binary.',
-    currOwned: 0,
+    img: '../assets/imgs/structures_supercomputer.png',
   },
   quantum: {
     name: 'quantum',
-    baseGen: 1000000,
+    baseGen: 7800,
     genMultiplier: 1,
-    baseCost: 100000000,
+    baseCost: 1400000,
     text: 'They do exist! You just couldn\'t possibly afford one before.',
-    currOwned: 0,
+    img: '../assets/imgs/structures_quantum.png',
   },
 };
 
@@ -172,6 +170,7 @@ const upgrades = {
 const player = {
   bits: 0,
   structures: [],
+  clickMultiplier: 1,
 };
 
 // global functions
@@ -196,6 +195,7 @@ const addUpgradesToUI = () => {
       upImg.className = 'upgrade-item unavailable';
       upImg.setAttribute('data-multiplier', upgrade.multiplier);
       upImg.setAttribute('data-affects', upgrade.affects);
+      upImg.setAttribute('data-cost', upgrade.cost);
       upgradesDiv.appendChild(upImg);
     }
   }
@@ -209,16 +209,19 @@ const addNewStructure = (structure) => {
     removeBits(bought.baseCost);
     player.structures.push(bought);
 
-    const newCost = structures[structure].baseCost * 1.15;
-    structures[structure].baseCost = Number(newCost.toFixed(0));
+    const newCost = bought.baseCost * 1.15;
+    bought.baseCost = Number(newCost.toFixed(0));
+    const genClass = `.buy-${bought.name}`;
+    const displayNewPrice = document.querySelector(`${genClass} > div > span`);
+    displayNewPrice.innerText = bought.baseCost;
 
     // add to structures visible on right side
-    const newStructure = document.createElement('span');
-    newStructure.innerHTML = `${bought.name}`;
+    const newStructure = document.createElement('img');
+    newStructure.src = `../assets/imgs/structures_${bought.name}.png`;
+    const structureSpace = document.querySelector(`.structures-${structures[structure].name}`);
     structureSpace.appendChild(newStructure);
 
     // add to structure counter
-    // must make it general.
     let counter = 0;
     switch (structures[structure].name) {
       case 'toaster':
@@ -260,12 +263,18 @@ const addNewStructure = (structure) => {
 };
 
 const addNewUpgrade = (upgrade) => {
-  upgrade.setAttribute('hidden', true);
-  player.structures.forEach((structure) => {
-    if (upgrade.getAttribute('data-affects') === structure.name) {
-      structure.genMultiplier = Number(upgrade.getAttribute('data-multiplier'));
-    }
-  });
+  if (player.bits >= Number(upgrade.getAttribute('data-cost'))) {
+    removeBits(Number(upgrade.getAttribute('data-cost')));
+    upgrade.setAttribute('hidden', true);
+
+    player.structures.forEach((structure) => {
+      if (upgrade.getAttribute('data-affects') === structure.name) {
+        structure.genMultiplier = Number(upgrade.getAttribute('data-multiplier'));
+      }
+    });
+  } else {
+    alert(`You lack the sufficient funds.`)
+  }
 };
 
 const passiveBitGeneration = () => {
@@ -275,7 +284,7 @@ const passiveBitGeneration = () => {
 };
 
 // Event listeners
-clicker.addEventListener('click', e => addBits(1));
+clicker.addEventListener('click', e => addBits(player.clickMultiplier));
 toasterDiv.addEventListener('click', e => addNewStructure('toaster'));
 mobileDiv.addEventListener('click', e => addNewStructure('mobile'));
 computerDiv.addEventListener('click', e => addNewStructure('computer'));

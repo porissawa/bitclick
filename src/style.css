@@ -58,30 +58,58 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 80px;
+  padding: 0px 5px;
+  text-align: center;
   border-bottom: 1px solid black;
+}
+
+.market-item > div {
+  width: 20%;
+}
+
+.market-item > div > img {
+  max-width: 70%;
+  height: 40px;
+}
+
+.market-item-desc {
+  width: 60%;
+  text-align: left;
+}
+
+.market-item-desc > p {
+  margin-bottom: 5px;
+  margin-top: -4px;
+}
+
+.market-item > span {
+  width: 20%;
 }
 
 #screen-right {
   height: 800px;
   width: 900px;
-  background-color: purple;
 }
 
-#programs {
-  height: 200px;
-  width: 900px;
-  background-color: blue;
-}
-#hardware {
-  height: 200px;
-  width: 900px;
-  background-color: blueviolet;
-}
 #structures {
-  height: 200px;
+  height: 600px;
   width: 900px;
-  background-color: aquamarine;
+  overflow-y: scroll;
 }
+
+#structures div {
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+}
+
+#structures div img {
+  margin: 5px 5px;
+  height: 100px;
+}
+
 #terminal {
   height: 200px;
   width: 900px;
