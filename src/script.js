@@ -2,6 +2,7 @@ const clicker = document.getElementById('clicker');
 // const term = document.getElementById('terminal');
 const bitCounter = document.querySelector('.bit-counter > span');
 
+// market items
 const toasterDiv = document.querySelector('.buy-toaster');
 const toasterCounter = document.querySelector('.buy-toaster > span');
 
@@ -19,6 +20,10 @@ const supercomputerCounter = document.querySelector('.buy-supercomputer > span')
 
 const quantumDiv = document.querySelector('.buy-quantum');
 const quantumCounter = document.querySelector('.buy-quantum > span');
+
+// market upgrades
+const upgradesDiv = document.querySelector('.market-upgrades');
+let upgradeItems = document.querySelectorAll('.upgrade-item');
 
 const structureSpace = document.getElementById('structures');
 
@@ -74,17 +79,105 @@ const structures = {
   },
 };
 
+const upgrades = {
+  toaster: {
+    upgrade1: {
+      affects: 'toaster',
+      name: 'Wifi',
+      cost: 1000,
+      multiplier: 1.1,
+      src: '../assets/imgs/up1.png',
+    },
+    upgrade2: {
+      affects: 'toaster',
+      name: 'Mesh capabilities',
+      cost: 50000,
+      multiplier: 1.5,
+      src: '../assets/imgs/up2.png',
+    },
+  },
+  mobile: {
+    upgrade1: {
+      affects: 'mobile',
+      name: 'aaaaa',
+      cost: 1000,
+      multiplier: 1.1,
+      src: '../assets/imgs/up3.png',
+    },
+    upgrade2: {
+      affects: 'mobile',
+      name: 'bbbbb',
+      cost: 50000,
+      multiplier: 1.5,
+    },
+  },
+  computer: {
+    upgrade1: {
+      affects: 'computer',
+      name: 'ccccc',
+      cost: 1000,
+      multiplier: 1.1,
+    },
+    upgrade2: {
+      affects: 'computer',
+      name: 'dddddd',
+      cost: 50000,
+      multiplier: 1.5,
+    },
+  },
+  server: {
+    upgrade1: {
+      affects: 'server',
+      name: 'eeeee',
+      cost: 1000,
+      multiplier: 1.1,
+    },
+    upgrade2: {
+      affects: 'server',
+      name: 'ffffff',
+      cost: 50000,
+      multiplier: 1.5,
+    },
+  },
+  supercomputer: {
+    upgrade1: {
+      affects: 'supercomputer',
+      name: 'gggggg',
+      cost: 1000,
+      multiplier: 1.1,
+    },
+    upgrade2: {
+      affects: 'supercomputer',
+      name: 'hhhhhhh',
+      cost: 50000,
+      multiplier: 1.5,
+    },
+  },
+  quantum: {
+    upgrade1: {
+      affects: 'quantum',
+      name: 'iiiiii',
+      cost: 1000,
+      multiplier: 1.1,
+    },
+    upgrade2: {
+      affects: 'quantum',
+      name: 'jjjjjjj',
+      cost: 50000,
+      multiplier: 1.5,
+    },
+  },
+};
 
 const player = {
   bits: 0,
   structures: [],
 };
 
-
 // global functions
 const addBits = (num) => {
   player.bits += num;
-  bitCounter.innerText = player.bits;
+  bitCounter.innerText = player.bits.toFixed(0);
 };
 
 const removeBits = (num) => {
@@ -92,11 +185,32 @@ const removeBits = (num) => {
   bitCounter.innerText = player.bits;
 };
 
+const addUpgradesToUI = () => {
+  const vals = Object.values(upgrades);
+  for (let i = 0; i < vals.length; i += 1) {
+    for (let j = 0; j < Object.values(vals[i]).length; j += 1) {
+      const upImg = document.createElement('img');
+      const upgrade = Object.values(vals[i])[j];
+      upImg.alt = upgrade.name;
+      upImg.src = upgrade.src;
+      upImg.className = 'upgrade-item unavailable';
+      upImg.setAttribute('data-multiplier', upgrade.multiplier);
+      upImg.setAttribute('data-affects', upgrade.affects);
+      upgradesDiv.appendChild(upImg);
+    }
+  }
+  upgradeItems = document.querySelectorAll('.upgrade-item');
+  return upgradeItems;
+};
+
 const addNewStructure = (structure) => {
   const bought = structures[structure];
   if (player.bits >= bought.baseCost) {
     removeBits(bought.baseCost);
     player.structures.push(bought);
+
+    const newCost = structures[structure].baseCost * 1.15;
+    structures[structure].baseCost = Number(newCost.toFixed(0));
 
     // add to structures visible on right side
     const newStructure = document.createElement('span');
@@ -145,14 +259,19 @@ const addNewStructure = (structure) => {
   }
 };
 
+const addNewUpgrade = (upgrade) => {
+  upgrade.setAttribute('hidden', true);
+  player.structures.forEach((structure) => {
+    if (upgrade.getAttribute('data-affects') === structure.name) {
+      structure.genMultiplier = Number(upgrade.getAttribute('data-multiplier'));
+    }
+  });
+};
+
 const passiveBitGeneration = () => {
   player.structures.forEach((structure) => {
     addBits((structure.baseGen * structure.genMultiplier));
   });
-};
-
-const startGame = () => {
-  passiveBitGeneration();
 };
 
 // Event listeners
@@ -163,5 +282,9 @@ computerDiv.addEventListener('click', e => addNewStructure('computer'));
 serverDiv.addEventListener('click', e => addNewStructure('server'));
 supercomputerDiv.addEventListener('click', e => addNewStructure('supercomputer'));
 quantumDiv.addEventListener('click', e => addNewStructure('quantum'));
+upgradesDiv.addEventListener('click', e => addNewUpgrade(e.target));
 
-window.onload = () => setInterval(startGame, 1000);
+window.onload = () => {
+  addUpgradesToUI();
+  setInterval(passiveBitGeneration, 1000);
+};

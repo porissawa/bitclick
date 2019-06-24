@@ -37,7 +37,19 @@ body {
 #market {
   height: 600px;
   width: 300px;
+}
+
+.market-structures {
+  height: 400px;
+  width: 300px;
   background-color: orange;
+  overflow-y: scroll;
+}
+
+.market-upgrades {
+  height: 200px;
+  width: 300px;
+  background-color: green;
   overflow-y: scroll;
 }
 
