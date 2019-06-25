@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/13.8.12/Tone.min.js" integrity="sha256-dkaO/q/8qkzLcxzcFH2BrIltvicuMNsmB6+ppG7dCY8=" crossorigin="anonymous"></script>
   <title>DOM Game</title>
 </head>
 <body>
   <div id="container">
     <div id="screen-left">
       <div id="click-area">
-        <button id="clicker"></button>
+        <button id="clicker"><img src="../assets/imgs/clicker_money.png" alt="click here!"></button>
       </div>
       <div id="market">
         <div class="market-structures">
@@ -24,61 +26,61 @@
               <span class="toaster-cost">15</span>
             </div>
             <span class="toaster-count">0</span>
-            </div>
-            <div class="market-item buy-mobile">
-              <div>  
-                <img src="../assets/imgs/structures_mobile.png" alt="buy mobile">
-              </div>  
-              <div class="market-item-desc">
-                <p>Cellphone</p>
-                <span class="cellphone-cost">100</span>
-              </div>
-              <span class="mobile-count">0</span>
-            </div>
-            <div class="market-item buy-computer">
-              <div>  
-                <img src="../assets/imgs/structures_computer.png" alt="buy computer">
-              </div>  
-              <div class="market-item-desc">
-                <p>Computer</p>
-                <span class="computer-cost">1100</span>
-              </div>
-              <span class="computer-count">0</span>
-            </div>
-            <div class="market-item buy-server">
-              <div>  
-                <img src="../assets/imgs/structures_server.png" alt="buy server">
-              </div>  
-              <div class="market-item-desc">
-                <p>Server</p>
-                <span class="server-cost">12000</span>
-              </div>
-              <span class="server-count">0</span>
-            </div>
-            <div class="market-item buy-supercomputer">
-              <div>  
-                <img src="../assets/imgs/structures_supercomputer.png" alt="buy supercomputer">
-              </div>  
-              <div class="market-item-desc">
-                <p>Supercomputer</p>
-                <span class="supercomputer-cost">130000</span>
-              </div>
-              <span class="supercomputer-count">0</span>
-            </div>
-            <div class="market-item buy-quantum">
-              <div>  
-                <img src="../assets/imgs/structures_quantum.png" alt="buy quantum">
-              </div>  
-              <div class="market-item-desc">
-                <p>Quantum</p>
-                <span class="quantum-cost">1400000</span>
-              </div>
-              <span class="quantum-count">0</span>
-            </div>
           </div>
-          <div class="market-upgrades">
+          <div class="market-item buy-mobile">
+            <div>  
+              <img src="../assets/imgs/structures_mobile.png" alt="buy mobile">
+            </div>  
+            <div class="market-item-desc">
+              <p>Cellphone</p>
+              <span class="cellphone-cost">100</span>
+            </div>
+            <span class="mobile-count">0</span>
+          </div>
+          <div class="market-item buy-computer">
+            <div>  
+              <img src="../assets/imgs/structures_computer.png" alt="buy computer">
+            </div>  
+            <div class="market-item-desc">
+              <p>Computer</p>
+              <span class="computer-cost">1100</span>
+            </div>
+            <span class="computer-count">0</span>
+          </div>
+          <div class="market-item buy-server">
+            <div>  
+              <img src="../assets/imgs/structures_server.png" alt="buy server">
+            </div>  
+            <div class="market-item-desc">
+              <p>Server</p>
+              <span class="server-cost">12000</span>
+            </div>
+            <span class="server-count">0</span>
+          </div>
+          <div class="market-item buy-supercomputer">
+            <div>  
+              <img src="../assets/imgs/structures_supercomputer.png" alt="buy supercomputer">
+            </div>  
+            <div class="market-item-desc">
+              <p>Supercomputer</p>
+              <span class="supercomputer-cost">130000</span>
+            </div>
+            <span class="supercomputer-count">0</span>
+          </div>
+          <div class="market-item buy-quantum">
+            <div>  
+              <img src="../assets/imgs/structures_quantum.png" alt="buy quantum">
+            </div>  
+            <div class="market-item-desc">
+              <p>Quantum</p>
+              <span class="quantum-cost">1400000</span>
+            </div>
+            <span class="quantum-count">0</span>
+          </div>
+        </div>
+        <div class="market-upgrades">
 
-          </div>
+        </div>
       </div>
     </div>
     <div id="screen-right">
@@ -92,12 +94,22 @@
       </div>
       <div id="terminal">
         <div class="bit-counter">
+          <p>Bits: </p>
           <span>0</span>
         </div>
       </div>
     </div>
+    <div class="structure-descriptions">
+      <div class="structure-descriptions-toaster" hidden></div>
+      <div class="structure-descriptions-mobile" hidden></div>
+      <div class="structure-descriptions-computer" hidden></div>
+      <div class="structure-descriptions-server" hidden></div>
+      <div class="structure-descriptions-supercomputer" hidden></div>
+      <div class="structure-descriptions-quantum" hidden></div>
+    </div>
   </div>
 
+  <script src="music.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

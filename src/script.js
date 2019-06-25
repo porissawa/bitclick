@@ -81,88 +81,181 @@ const upgrades = {
   toaster: {
     upgrade1: {
       affects: 'toaster',
-      name: 'Wifi',
-      cost: 1000,
+      name: 'Toaster I',
+      cost: 100,
       multiplier: 1.1,
-      src: '../assets/imgs/up1.png',
+      src: '../assets/imgs/upgrades/azul1.png',
     },
     upgrade2: {
       affects: 'toaster',
-      name: 'Mesh capabilities',
-      cost: 50000,
+      name: 'Toaster II',
+      cost: 500,
       multiplier: 1.5,
-      src: '../assets/imgs/up2.png',
+      src: '../assets/imgs/upgrades/azul2.png',
+    },
+    upgrade3: {
+      affects: 'toaster',
+      name: 'Toaster III',
+      cost: 10000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/azul3.png',
+    },
+    upgrade4: {
+      affects: 'toaster',
+      name: 'Toaster IV',
+      cost: 100000,
+      multiplier: 2.5,
+      src: '../assets/imgs/upgrades/azul4.png',
     },
   },
   mobile: {
     upgrade1: {
       affects: 'mobile',
-      name: 'aaaaa',
+      name: 'Mobile I',
       cost: 1000,
       multiplier: 1.1,
-      src: '../assets/imgs/up3.png',
+      src: '../assets/imgs/upgrades/amarela1.png',
     },
     upgrade2: {
       affects: 'mobile',
-      name: 'bbbbb',
+      name: 'Mobile II',
       cost: 50000,
       multiplier: 1.5,
+      src: '../assets/imgs/upgrades/amarela2.png',
+    },
+    upgrade3: {
+      affects: 'mobile',
+      name: 'Mobile III',
+      cost: 50000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/amarela3.png',
+    },
+    upgrade4: {
+      affects: 'mobile',
+      name: 'Mobile IV',
+      cost: 5000000,
+      multiplier: 4,
+      src: '../assets/imgs/upgrades/amarela4.png',
     },
   },
   computer: {
     upgrade1: {
       affects: 'computer',
-      name: 'ccccc',
-      cost: 1000,
-      multiplier: 1.1,
+      name: 'Computer I',
+      cost: 11000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/pedra1.png',
     },
     upgrade2: {
       affects: 'computer',
-      name: 'dddddd',
-      cost: 50000,
-      multiplier: 1.5,
+      name: 'Computer II',
+      cost: 55000,
+      multiplier: 4,
+      src: '../assets/imgs/upgrades/pedra2.png',
+    },
+    upgrade3: {
+      affects: 'computer',
+      name: 'Computer III',
+      cost: 550000,
+      multiplier: 8,
+      src: '../assets/imgs/upgrades/pedra3.png',
+    },
+    upgrade4: {
+      affects: 'computer',
+      name: 'Computer IV',
+      cost: 55000000,
+      multiplier: 16,
+      src: '../assets/imgs/upgrades/pedra4.png',
     },
   },
   server: {
     upgrade1: {
       affects: 'server',
-      name: 'eeeee',
-      cost: 1000,
-      multiplier: 1.1,
+      name: 'Server I',
+      cost: 120000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/rank1.png',
     },
     upgrade2: {
       affects: 'server',
-      name: 'ffffff',
-      cost: 50000,
-      multiplier: 1.5,
+      name: 'Server II',
+      cost: 600000,
+      multiplier: 4,
+      src: '../assets/imgs/upgrades/rank2.png',
+    },
+    upgrade3: {
+      affects: 'server',
+      name: 'Server III',
+      cost: 6000000,
+      multiplier: 8,
+      src: '../assets/imgs/upgrades/rank3.png',
+    },
+    upgrade4: {
+      affects: 'server',
+      name: 'Server IV',
+      cost: 600000000,
+      multiplier: 16,
+      src: '../assets/imgs/upgrades/rank4.png',
     },
   },
   supercomputer: {
     upgrade1: {
       affects: 'supercomputer',
-      name: 'gggggg',
-      cost: 1000,
-      multiplier: 1.1,
+      name: 'I',
+      cost: 1300000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/verde1.png',
     },
     upgrade2: {
       affects: 'supercomputer',
-      name: 'hhhhhhh',
-      cost: 50000,
-      multiplier: 1.5,
+      name: 'II',
+      cost: 6500000,
+      multiplier: 4,
+      src: '../assets/imgs/upgrades/verde2.png',
+    },
+    upgrade3: {
+      affects: 'supercomputer',
+      name: 'III',
+      cost: 65000000,
+      multiplier: 8,
+      src: '../assets/imgs/upgrades/verde3.png',
+    },
+    upgrade4: {
+      affects: 'supercomputer',
+      name: 'IV',
+      cost: 6500000000,
+      multiplier: 16,
+      src: '../assets/imgs/upgrades/verde4.png',
     },
   },
   quantum: {
     upgrade1: {
       affects: 'quantum',
-      name: 'iiiiii',
-      cost: 1000,
-      multiplier: 1.1,
+      name: 'I',
+      cost: 14000000,
+      multiplier: 2,
+      src: '../assets/imgs/upgrades/quantum1.png',
     },
     upgrade2: {
       affects: 'quantum',
-      name: 'jjjjjjj',
-      cost: 50000,
-      multiplier: 1.5,
+      name: 'II',
+      cost: 700000000,
+      multiplier: 4,
+      src: '../assets/imgs/upgrades/quantum2.png',
+    },
+    upgrade3: {
+      affects: 'quantum',
+      name: 'III',
+      cost: 7000000000,
+      multiplier: 8,
+      src: '../assets/imgs/upgrades/quantum3.png',
+    },
+    upgrade4: {
+      affects: 'quantum',
+      name: 'IV',
+      cost: 70000000000,
+      multiplier: 16,
+      src: '../assets/imgs/upgrades/quantum4.png',
     },
   },
 };
@@ -176,12 +269,12 @@ const player = {
 // global functions
 const addBits = (num) => {
   player.bits += num;
-  bitCounter.innerText = player.bits.toFixed(0);
+  bitCounter.innerText = Math.floor(player.bits.toFixed(0));
 };
 
 const removeBits = (num) => {
   player.bits -= num;
-  bitCounter.innerText = player.bits;
+  bitCounter.innerText = Math.floor(player.bits.toFixed(0));
 };
 
 const addUpgradesToUI = () => {
@@ -207,6 +300,7 @@ const addNewStructure = (structure) => {
   const bought = structures[structure];
   if (player.bits >= bought.baseCost) {
     removeBits(bought.baseCost);
+    buyNoise();
     player.structures.push(bought);
 
     const newCost = bought.baseCost * 1.15;
@@ -258,6 +352,7 @@ const addNewStructure = (structure) => {
         break;
     }
   } else {
+    failedNoise();
     alert('You lack the sufficient funds');
   }
 };
@@ -266,6 +361,7 @@ const addNewUpgrade = (upgrade) => {
   if (player.bits >= Number(upgrade.getAttribute('data-cost'))) {
     removeBits(Number(upgrade.getAttribute('data-cost')));
     upgrade.setAttribute('hidden', true);
+    buyUpgrade();
 
     player.structures.forEach((structure) => {
       if (upgrade.getAttribute('data-affects') === structure.name) {
@@ -273,25 +369,52 @@ const addNewUpgrade = (upgrade) => {
       }
     });
   } else {
-    alert(`You lack the sufficient funds.`)
+    failedNoise();
+    alert(`You lack the sufficient funds.`);
   }
 };
 
 const passiveBitGeneration = () => {
   player.structures.forEach((structure) => {
-    addBits((structure.baseGen * structure.genMultiplier));
+    Math.floor(addBits((structure.baseGen * structure.genMultiplier)));
   });
 };
 
 // Event listeners
-clicker.addEventListener('click', e => addBits(player.clickMultiplier));
-toasterDiv.addEventListener('click', e => addNewStructure('toaster'));
-mobileDiv.addEventListener('click', e => addNewStructure('mobile'));
-computerDiv.addEventListener('click', e => addNewStructure('computer'));
-serverDiv.addEventListener('click', e => addNewStructure('server'));
-supercomputerDiv.addEventListener('click', e => addNewStructure('supercomputer'));
-quantumDiv.addEventListener('click', e => addNewStructure('quantum'));
-upgradesDiv.addEventListener('click', e => addNewUpgrade(e.target));
+clicker.addEventListener('click', (e) => { 
+  addBits(player.clickMultiplier);
+  clickNoise();
+});
+
+toasterDiv.addEventListener('click', (e) => {
+  addNewStructure('toaster');
+});
+
+mobileDiv.addEventListener('click', (e) => {
+  addNewStructure('mobile');
+});
+
+computerDiv.addEventListener('click', (e) => {
+  addNewStructure('computer');
+});
+
+serverDiv.addEventListener('click', (e) => {
+  addNewStructure('server');
+});
+
+supercomputerDiv.addEventListener('click', (e) => {
+  addNewStructure('supercomputer');
+});
+
+quantumDiv.addEventListener('click', (e) => {
+  addNewStructure('quantum');
+});
+
+upgradesDiv.addEventListener('click', (e) => {
+  if (e.target.tagName !== 'DIV') {
+    addNewUpgrade(e.target);
+  }
+});
 
 window.onload = () => {
   addUpgradesToUI();
