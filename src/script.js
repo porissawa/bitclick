@@ -34,7 +34,6 @@ const structures = {
     baseGen: 1,
     genMultiplier: 1,
     baseCost: 15,
-    text: 'Who knew we\'d ever need internet connected toasters?',
     img: '../assets/imgs/structures_toaster.png',
     currOwned: 0,
   },
@@ -43,7 +42,6 @@ const structures = {
     baseGen: 8,
     genMultiplier: 1,
     baseCost: 100,
-    text: 'Ring ring, who\'s there?',
     img: '../assets/imgs/structure_mobile.png',
     currOwned: 0,
   },
@@ -52,7 +50,6 @@ const structures = {
     baseGen: 47,
     genMultiplier: 1,
     baseCost: 1100,
-    text: 'Another computer to your collection.',
     img: '../assets/imgs/structures_computer.png',
     currOwned: 0,
   },
@@ -61,7 +58,6 @@ const structures = {
     baseGen: 260,
     genMultiplier: 1,
     baseCost: 12000,
-    text: 'LOREM IPSUM THINK OF SOMETHING DOLOR AMET',
     img: '../assets/imgs/structures_server.png',
     currOwned: 0,
   },
@@ -70,7 +66,6 @@ const structures = {
     baseGen: 1400,
     genMultiplier: 1,
     baseCost: 130000,
-    text: 'Like Auntie, but its hashes are binary.',
     img: '../assets/imgs/structures_supercomputer.png',
     currOwned: 0,
   },
@@ -79,7 +74,6 @@ const structures = {
     baseGen: 7800,
     genMultiplier: 1,
     baseCost: 1400000,
-    text: 'They do exist! You just couldn\'t possibly afford one before.',
     img: '../assets/imgs/structures_quantum.png',
     currOwned: 0,
   },
@@ -395,24 +389,23 @@ const showDetails = (hover) => {
   infoContainer.className = 'term-info-container';
   const infoContainerText = document.createElement('p');
 
-  if (hover.tagName === 'IMG') {
+  if (hover.attributes.getNamedItem('data-affects') !== null) {
     const name = hover.getAttribute('alt');
     const gens = hover.getAttribute('data-multiplier');
     const cost = hover.getAttribute('data-cost');
     const affects = hover.getAttribute('data-affects');
     const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
-    infoContainerText.innerText = `Upgrade ${name} costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
+    infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
   } else if (hover.className !== 'market-upgrades') {
-    const structureName = hover.querySelector('.market-item-desc > p').innerText;
-    const structure = structures[structureName.toLowerCase()];
+    const structureName = hover.getAttribute('data-name');
+    const structure = structures[structureName];
     const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
-    const name = hover.querySelector('.market-item-desc > p').innerText;
-    const cost = hover.querySelector('.market-item-desc > span').innerText;
-    infoContainerText.innerText = `A single ${name} generates ${structure.baseGen} bits per second.
+    const { name, baseCost } = structure;
+    infoContainerText.innerText = `> A ${name} generates ${structure.baseGen} bits per second.
 
-    An additional ${name} will cost ${cost} bits.
+    > An additional unit will cost ${baseCost} bits.
 
-    You currently generate ${gens} BpS from them.`;
+    > You currently generate ${gens} BpS from them.`;
   }
   infoContainer.append(infoContainerText);
   term.append(infoContainer);
@@ -473,6 +466,8 @@ upgradesDiv.addEventListener('mouseout', (e) => {
   infoContainer.remove();
 });
 
+
+// Start game
 window.onload = () => {
   addUpgradesToUI();
   setInterval(passiveBitGeneration, 1000);
