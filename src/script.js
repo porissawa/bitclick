@@ -1,8 +1,10 @@
 const clicker = document.getElementById('clicker');
-// const term = document.getElementById('terminal');
+const term = document.getElementById('terminal');
 const bitCounter = document.querySelector('.bit-counter > span');
 
 // market items
+const marketItems = document.querySelector('.market-structures');
+
 const toasterDiv = document.querySelector('.buy-toaster');
 const toasterCounter = document.querySelector('.buy-toaster > span');
 
@@ -34,6 +36,7 @@ const structures = {
     baseCost: 15,
     text: 'Who knew we\'d ever need internet connected toasters?',
     img: '../assets/imgs/structures_toaster.png',
+    currOwned: 0,
   },
   mobile: {
     name: 'mobile',
@@ -42,6 +45,7 @@ const structures = {
     baseCost: 100,
     text: 'Ring ring, who\'s there?',
     img: '../assets/imgs/structure_mobile.png',
+    currOwned: 0,
   },
   computer: {
     name: 'computer',
@@ -50,6 +54,7 @@ const structures = {
     baseCost: 1100,
     text: 'Another computer to your collection.',
     img: '../assets/imgs/structures_computer.png',
+    currOwned: 0,
   },
   server: {
     name: 'server',
@@ -58,6 +63,7 @@ const structures = {
     baseCost: 12000,
     text: 'LOREM IPSUM THINK OF SOMETHING DOLOR AMET',
     img: '../assets/imgs/structures_server.png',
+    currOwned: 0,
   },
   supercomputer: {
     name: 'supercomputer',
@@ -66,6 +72,7 @@ const structures = {
     baseCost: 130000,
     text: 'Like Auntie, but its hashes are binary.',
     img: '../assets/imgs/structures_supercomputer.png',
+    currOwned: 0,
   },
   quantum: {
     name: 'quantum',
@@ -74,9 +81,11 @@ const structures = {
     baseCost: 1400000,
     text: 'They do exist! You just couldn\'t possibly afford one before.',
     img: '../assets/imgs/structures_quantum.png',
+    currOwned: 0,
   },
 };
 
+// criar upgrades que multiplicam os bits por clique
 const upgrades = {
   toaster: {
     upgrade1: {
@@ -302,6 +311,7 @@ const addNewStructure = (structure) => {
     removeBits(bought.baseCost);
     buyNoise();
     player.structures.push(bought);
+    bought.currOwned += 1;
 
     const newCost = bought.baseCost * 1.15;
     bought.baseCost = Number(newCost.toFixed(0));
@@ -380,6 +390,34 @@ const passiveBitGeneration = () => {
   });
 };
 
+const showDetails = (hover) => {
+  const infoContainer = document.createElement('div');
+  infoContainer.className = 'term-info-container';
+  const infoContainerText = document.createElement('p');
+
+  if (hover.tagName === 'IMG') {
+    const name = hover.getAttribute('alt');
+    const gens = hover.getAttribute('data-multiplier');
+    const cost = hover.getAttribute('data-cost');
+    const affects = hover.getAttribute('data-affects');
+    const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
+    infoContainerText.innerText = `Upgrade ${name} costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
+  } else if (hover.className !== 'market-upgrades') {
+    const structureName = hover.querySelector('.market-item-desc > p').innerText;
+    const structure = structures[structureName.toLowerCase()];
+    const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
+    const name = hover.querySelector('.market-item-desc > p').innerText;
+    const cost = hover.querySelector('.market-item-desc > span').innerText;
+    infoContainerText.innerText = `A single ${name} generates ${structure.baseGen} bits per second.
+
+    An additional ${name} will cost ${cost} bits.
+
+    You currently generate ${gens} BpS from them.`;
+  }
+  infoContainer.append(infoContainerText);
+  term.append(infoContainer);
+};
+
 // Event listeners
 clicker.addEventListener('click', (e) => { 
   addBits(player.clickMultiplier);
@@ -414,6 +452,25 @@ upgradesDiv.addEventListener('click', (e) => {
   if (e.target.tagName !== 'DIV') {
     addNewUpgrade(e.target);
   }
+});
+
+// Show details
+marketItems.addEventListener('mouseover', (e) => {
+  showDetails(e.target);
+});
+
+marketItems.addEventListener('mouseout', (e) => {
+  const infoContainer = term.querySelector('.term-info-container');
+  infoContainer.remove();
+});
+
+upgradesDiv.addEventListener('mouseover', (e) => {
+  showDetails(e.target);
+});
+
+upgradesDiv.addEventListener('mouseout', (e) => {
+  const infoContainer = term.querySelector('.term-info-container');
+  infoContainer.remove();
 });
 
 window.onload = () => {

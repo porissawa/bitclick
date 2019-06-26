@@ -33,7 +33,6 @@ const buyUpgrade = () => {
 
 const buyNoise = () => {
   const sound = new Tone.MonoSynth({
-    // frequency: 'C4',s
     detune: 0.5,
     oscillator: {
       type: 'square',
