@@ -122,7 +122,7 @@ const upgrades = {
     upgrade2: {
       affects: 'mobile',
       name: 'Mobile II',
-      cost: 50000,
+      cost: 5000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/amarela2.png',
     },
