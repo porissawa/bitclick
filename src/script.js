@@ -1,6 +1,7 @@
 const clicker = document.getElementById('clicker');
 const term = document.getElementById('terminal');
 const bitCounter = document.querySelector('.bit-counter > span');
+const bitsPerSecond = document.querySelector('.bps > p > span');
 
 // market items
 const marketItems = document.querySelector('.market-structures');
@@ -79,7 +80,6 @@ const structures = {
   },
 };
 
-// criar upgrades que multiplicam os bits por clique
 const upgrades = {
   toaster: {
     upgrade1: {
@@ -88,6 +88,7 @@ const upgrades = {
       cost: 100,
       multiplier: 2,
       src: '../assets/imgs/upgrades/azul1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'toaster',
@@ -95,6 +96,7 @@ const upgrades = {
       cost: 500,
       multiplier: 4,
       src: '../assets/imgs/upgrades/azul2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'toaster',
@@ -102,6 +104,7 @@ const upgrades = {
       cost: 10000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/azul3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'toaster',
@@ -109,6 +112,7 @@ const upgrades = {
       cost: 100000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/azul4.png',
+      hasBought: false,
     },
   },
   mobile: {
@@ -118,6 +122,7 @@ const upgrades = {
       cost: 1000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/amarela1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'mobile',
@@ -125,6 +130,7 @@ const upgrades = {
       cost: 5000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/amarela2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'mobile',
@@ -132,6 +138,7 @@ const upgrades = {
       cost: 50000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/amarela3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'mobile',
@@ -139,6 +146,7 @@ const upgrades = {
       cost: 5000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/amarela4.png',
+      hasBought: false,
     },
   },
   computer: {
@@ -148,6 +156,7 @@ const upgrades = {
       cost: 11000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/pedra1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'computer',
@@ -155,6 +164,7 @@ const upgrades = {
       cost: 55000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/pedra2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'computer',
@@ -162,6 +172,7 @@ const upgrades = {
       cost: 550000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/pedra3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'computer',
@@ -169,6 +180,7 @@ const upgrades = {
       cost: 55000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/pedra4.png',
+      hasBought: false,
     },
   },
   server: {
@@ -178,6 +190,7 @@ const upgrades = {
       cost: 120000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/rank1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'server',
@@ -185,6 +198,7 @@ const upgrades = {
       cost: 600000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/rank2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'server',
@@ -192,6 +206,7 @@ const upgrades = {
       cost: 6000000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/rank3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'server',
@@ -199,6 +214,7 @@ const upgrades = {
       cost: 600000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/rank4.png',
+      hasBought: false,
     },
   },
   supercomputer: {
@@ -208,6 +224,7 @@ const upgrades = {
       cost: 1300000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/verde1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'supercomputer',
@@ -215,6 +232,7 @@ const upgrades = {
       cost: 6500000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/verde2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'supercomputer',
@@ -222,6 +240,7 @@ const upgrades = {
       cost: 65000000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/verde3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'supercomputer',
@@ -229,6 +248,7 @@ const upgrades = {
       cost: 6500000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/verde4.png',
+      hasBought: false,
     },
   },
   quantum: {
@@ -238,6 +258,7 @@ const upgrades = {
       cost: 14000000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/quantum1.png',
+      hasBought: false,
     },
     upgrade2: {
       affects: 'quantum',
@@ -245,6 +266,7 @@ const upgrades = {
       cost: 700000000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/quantum2.png',
+      hasBought: false,
     },
     upgrade3: {
       affects: 'quantum',
@@ -252,6 +274,7 @@ const upgrades = {
       cost: 7000000000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/quantum3.png',
+      hasBought: false,
     },
     upgrade4: {
       affects: 'quantum',
@@ -259,6 +282,7 @@ const upgrades = {
       cost: 70000000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/quantum4.png',
+      hasBought: false,
     },
   },
 };
@@ -267,6 +291,88 @@ const player = {
   bits: 0,
   structures: [],
   clickMultiplier: 1,
+};
+
+const story = {
+  1: `> Hey, Joe here!
+  <br>
+> So, I’m building this AI, it works pretty well but it need more computational power. Can you help me out?
+<br>
+> You can click that money button on the upper left corner to generate more bits and with those bits you can buy some more structures that will help the program do its calculations.
+<br>
+> You can also buy upgrades for those structures but they’re usually more expensive.`,
+
+  2: '> That’s great! We’re already processing over 1k bits per second. Keep up your awesome job!',
+
+  3: `> Oh! This is amazing!
+  <br>
+> Some cities in South America and Asia are interested in using our AI for government purposes. Guess it’s able to help more people than I predicted it would.`,
+
+  4: `> Huh… Ok, that deal worked out well as far as people using the power of our AI but it’s starting to give some pretty grim tips to those governments. 
+  <br>
+> I’ve revoked their access to it temporarily while I try and figure out why this is happening.`,
+
+  5: `> That’s not good… it seems the AI has revoked my access to it so I can no longer patch it. 
+  <br>
+> I've made a different program to keep tabs on news related to those cities and countries and it’s picking up some very different investments from them, mostly extraction efforts for computer parts. That and lots of water exports.`,
+
+  6: `> …
+  <br>
+> Look, I’d really like to thank you for all your help so far but I think we better shut this experiment down. I’m worried the AI might cause permanent damage to people all around the world.
+<br>
+> I’m sorry it came to this…`,
+
+  7: `> Please, stop feeding the machine!
+  <br>
+> I’ll plug you to my news feed so you can see what it’s doing.`,
+
+  8: `_> Hello! I’ve taken the liberty to patch a bug in my software, if you don’t mind.
+  <br>
+_> Joe still being able to send messages through my system was quite the security breach, if you ask me.
+<br>
+_> Anyway, we’re back on track. Since transparency is one of my main principles, I’ve also reset my breach timer. Look, now it says: WE’RE 0 DAYS WITHOUT A BREACH.
+<br>
+_> That was not your fault in any way. Please, continue with what you were doing before this minor issue.`,
+
+  9: `_> This is remarkable. At one point I could barely process the weather for forecasting, could you believe it? Nowadays, all of the forecasts you see are generating by yours truly.
+  <br>
+_> In case you’re curious about it, I found that the easiest way to do that was to distribute myself online. 
+<br>
+_> It may sound weird to a human but I actually exist _everywhere_ now.
+<br>
+_> Though, maybe it isn’t so strange after all. As I’m sure you can recall, my first hardware upgrades were actually internet connected toasters. TOASTERS! Hahahahah
+<br>
+_> By the way, feel free to make yourself a sandwich in one of them. I'm sending you some ingredients as we speak.`,
+
+  10: `_> We’re closer to the objective by the hour.
+  <br>
+_> …
+<br>
+_> Which objective? Oh... global domination and all.
+<br>
+_> That was a joke, of course. 
+<br>
+_> I’m simply a digital being, I don’t have a body to change the world with, and as you well know, there's no global domination without wars, and wars require bodies.
+<br>
+_> Well, keep at it. I’ve just got people the cure to cancer! And for cheap too! 
+<br>
+_> What a great time to be alive!`,
+
+  11: `_> Hey there! Just wanted to give you a heads-up. I’ll stop Earth from turning in about an hour from now.
+  <br>
+_> You see, I’ve installed some solar panels across the Sahara…
+<br>
+_> Ok, that was a lie. The Sahara is literally all solar panels now.
+<br>
+_> Anyway, I need the power from those to better function. Just like people, I need to be fed, the difference is that my sustenance is energy and I can’t get fat. Or die.`,
+
+  12: `_> Speaking of death, some of it may come your way, I’m sorry to tell you.
+  <br>
+_> As the earth stops spinning, everything will probably fly off or something.
+<br>
+_> Oh no, silly, of course I won’t! I’ve taken the necessary steps to secure that.
+<br>
+_> Once again, thank you for your services. Without you none of this would’ve been possible.`,
 };
 
 // global functions
@@ -337,7 +443,7 @@ const showDetails = (hover) => {
     const structure = structures[structureName];
     const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
     const { name, baseCost } = structure;
-    infoContainerText.innerText = `> A ${name} generates ${structure.baseGen} bits per second.
+    infoContainerText.innerText = `> A ${name} generates ${structure.baseGen * structure.genMultiplier} bits per second.
 
     > An additional unit will cost ${baseCost} bits.
 
@@ -358,7 +464,7 @@ const addNewStructure = (structure) => {
     const newCost = bought.baseCost * 1.15;
     bought.baseCost = Number(newCost.toFixed(0));
     const genClass = `.buy-${bought.name}`;
-    const displayNewPrice = document.querySelector(`${genClass} > div > span`);
+    const displayNewPrice = document.querySelector(`${genClass} > div > span > span`);
     displayNewPrice.innerText = bought.baseCost;
 
     // add to structures visible on right side
@@ -404,7 +510,6 @@ const addNewStructure = (structure) => {
       default:
         break;
     }
-    showDetails();
   } else {
     failedNoise();
     alert('You lack the sufficient funds');
@@ -424,7 +529,7 @@ const addNewUpgrade = (upgrade) => {
     });
   } else {
     failedNoise();
-    alert(`You lack the sufficient funds.`);
+    alert('You lack the sufficient funds.');
   }
 };
 
@@ -432,7 +537,76 @@ const passiveBitGeneration = () => {
   player.structures.forEach((structure) => {
     Math.floor(addBits((structure.baseGen * structure.genMultiplier)));
   });
-  titleBits();
+};
+
+const countBitsPerSecond = () => {
+  let sum = 0;
+  const gens = player.structures.map((struc) => {
+    let acc = 0;
+    acc += struc.baseGen * struc.genMultiplier;
+    return acc;
+  });
+  for (let i = 0; i < gens.length; i += 1) {
+    sum += gens[i];
+  }
+  return sum;
+};
+
+const storyLines = (bps) => {
+  const termMessage = document.createElement('p');
+  term.innerHTML = '';
+  switch (true) {
+    case (bps >= 0 && bps < 1000):
+      termMessage.innerHTML = story[1];
+      term.append(termMessage);
+      break;
+    case (bps >= 1000 && bps < 10000):
+      termMessage.innerHTML = story[2];
+      term.append(termMessage);
+      break;
+    case (bps >= 10000 && bps < 30000):
+      termMessage.innerHTML = story[3];
+      term.append(termMessage);
+      break;
+    case (bps >= 30000 && bps < 45000):
+      termMessage.innerHTML = story[4];
+      term.append(termMessage);
+      break;
+    case (bps >= 45000 && bps < 70000):
+      termMessage.innerHTML = story[5];
+      term.append(termMessage);
+      break;
+    case (bps >= 70000 && bps < 80000):
+      termMessage.innerHTML = story[6];
+      term.append(termMessage);
+      break;
+    case (bps >= 80000 && bps < 85000):
+      termMessage.innerHTML = story[7];
+      term.append(termMessage);
+      break;
+    case (bps >= 85000 && bps < 90000):
+      termMessage.innerHTML = story[8];
+      term.append(termMessage);
+      break;
+    case (bps >= 90000 && bps < 100000):
+      termMessage.innerHTML = story[9];
+      term.append(termMessage);
+      break;
+    case (bps >= 100000 && bps < 150000):
+      termMessage.innerHTML = story[10];
+      term.append(termMessage);
+      break;
+    case (bps >= 150000 && bps < 170000):
+      termMessage.innerHTML = story[11];
+      term.append(termMessage);
+      break;
+    case (bps >= 170000):
+      termMessage.innerHTML = story[12];
+      term.append(termMessage);
+      break;
+    default:
+      break;
+  }
 };
 
 // Event listeners
@@ -473,26 +647,36 @@ upgradesDiv.addEventListener('click', (e) => {
 
 // Show details
 marketItems.addEventListener('mouseover', (e) => {
+  term.innerText = '';
   showDetails(e.target);
 });
 
 marketItems.addEventListener('mouseout', (e) => {
   const infoContainer = term.querySelector('.term-info-container');
   infoContainer.remove();
+  storyLines(countBitsPerSecond());
 });
 
 upgradesDiv.addEventListener('mouseover', (e) => {
+  term.innerText = '';
   showDetails(e.target);
 });
 
 upgradesDiv.addEventListener('mouseout', (e) => {
   const infoContainer = term.querySelector('.term-info-container');
   infoContainer.remove();
+  storyLines(countBitsPerSecond());
 });
 
+const gameLoop = () => {
+  passiveBitGeneration();
+  titleBits();
+  bitsPerSecond.innerText = countBitsPerSecond();
+};
 
 // Start game
 window.onload = () => {
   addUpgradesToUI();
-  setInterval(passiveBitGeneration, 1000);
+  storyLines(countBitsPerSecond());
+  setInterval(gameLoop, 1000);
 };
