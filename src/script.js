@@ -283,20 +283,17 @@ const removeBits = (num) => {
 const titleBits = () => {
   const title = document.querySelector('head > title');
   const { bits } = player;
+  const str = String(bits.toFixed(0));
   if (bits > 999999999999) {
-    const str = String(bits);
     const nmb = str.slice(0, str.length - 12);
     title.innerText = `${nmb}T bits`;
   } else if (bits <= 999999999999 && bits > 999999999) {
-    const str = String(bits);
     const nmb = str.slice(0, str.length - 9);
     title.innerText = `${nmb}B bits`;
   } else if (bits <= 999999999 && bits >= 1000000) {
-    const str = String(bits);
     const nmb = str.slice(0, str.length - 6);
     title.innerText = `${nmb}M bits`;
   } else if (bits <= 999999 && bits >= 1000) {
-    const str = String(bits);
     const nmb = str.slice(0, str.length - 3);
     title.innerText = `${nmb}K bits`;
   } else if (bits < 999) {
