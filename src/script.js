@@ -204,28 +204,28 @@ const upgrades = {
   supercomputer: {
     upgrade1: {
       affects: 'supercomputer',
-      name: 'I',
+      name: 'Supercomputer I',
       cost: 1300000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/verde1.png',
     },
     upgrade2: {
       affects: 'supercomputer',
-      name: 'II',
+      name: 'Supercomputer II',
       cost: 6500000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/verde2.png',
     },
     upgrade3: {
       affects: 'supercomputer',
-      name: 'III',
+      name: 'Supercomputer III',
       cost: 65000000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/verde3.png',
     },
     upgrade4: {
       affects: 'supercomputer',
-      name: 'IV',
+      name: 'Supercomputer IV',
       cost: 6500000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/verde4.png',
@@ -234,28 +234,28 @@ const upgrades = {
   quantum: {
     upgrade1: {
       affects: 'quantum',
-      name: 'I',
+      name: 'Quantum I',
       cost: 14000000,
       multiplier: 2,
       src: '../assets/imgs/upgrades/quantum1.png',
     },
     upgrade2: {
       affects: 'quantum',
-      name: 'II',
+      name: 'Quantum II',
       cost: 700000000,
       multiplier: 4,
       src: '../assets/imgs/upgrades/quantum2.png',
     },
     upgrade3: {
       affects: 'quantum',
-      name: 'III',
+      name: 'Quantum III',
       cost: 7000000000,
       multiplier: 8,
       src: '../assets/imgs/upgrades/quantum3.png',
     },
     upgrade4: {
       affects: 'quantum',
-      name: 'IV',
+      name: 'Quantum IV',
       cost: 70000000000,
       multiplier: 16,
       src: '../assets/imgs/upgrades/quantum4.png',
@@ -278,6 +278,30 @@ const addBits = (num) => {
 const removeBits = (num) => {
   player.bits -= num;
   bitCounter.innerText = Math.floor(player.bits.toFixed(0));
+};
+
+const titleBits = () => {
+  const title = document.querySelector('head > title');
+  const { bits } = player;
+  if (bits > 999999999999) {
+    const str = String(bits);
+    const nmb = str.slice(0, str.length - 12);
+    title.innerText = `${nmb}T bits`;
+  } else if (bits <= 999999999999 && bits > 999999999) {
+    const str = String(bits);
+    const nmb = str.slice(0, str.length - 9);
+    title.innerText = `${nmb}B bits`;
+  } else if (bits <= 999999999 && bits >= 1000000) {
+    const str = String(bits);
+    const nmb = str.slice(0, str.length - 6);
+    title.innerText = `${nmb}M bits`;
+  } else if (bits <= 999999 && bits >= 1000) {
+    const str = String(bits);
+    const nmb = str.slice(0, str.length - 3);
+    title.innerText = `${nmb}K bits`;
+  } else if (bits < 999) {
+    title.innerText = `${bits} bits`;
+  }
 };
 
 const addUpgradesToUI = () => {
@@ -317,6 +341,7 @@ const addNewStructure = (structure) => {
     const newStructure = document.createElement('img');
     newStructure.src = `../assets/imgs/structures_${bought.name}.png`;
     const structureSpace = document.querySelector(`.structures-${structures[structure].name}`);
+    structureSpace.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
     structureSpace.appendChild(newStructure);
 
     // add to structure counter
@@ -382,6 +407,7 @@ const passiveBitGeneration = () => {
   player.structures.forEach((structure) => {
     Math.floor(addBits((structure.baseGen * structure.genMultiplier)));
   });
+  titleBits();
 };
 
 const showDetails = (hover) => {
@@ -405,14 +431,14 @@ const showDetails = (hover) => {
 
     > An additional unit will cost ${baseCost} bits.
 
-    > You currently generate ${gens} BpS from them.`;
+    > You currently generate ${gens.toFixed(1)} BpS from them.`;
   }
   infoContainer.append(infoContainerText);
   term.append(infoContainer);
 };
 
 // Event listeners
-clicker.addEventListener('click', (e) => { 
+clicker.addEventListener('click', (e) => {
   addBits(player.clickMultiplier);
   clickNoise();
 });
