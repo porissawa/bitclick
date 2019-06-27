@@ -320,6 +320,33 @@ const addUpgradesToUI = () => {
   return upgradeItems;
 };
 
+const showDetails = (hover) => {
+  const infoContainer = document.createElement('div');
+  infoContainer.className = 'term-info-container';
+  const infoContainerText = document.createElement('p');
+
+  if (hover.attributes.getNamedItem('data-affects') !== null) {
+    const name = hover.getAttribute('alt');
+    const gens = hover.getAttribute('data-multiplier');
+    const cost = hover.getAttribute('data-cost');
+    const affects = hover.getAttribute('data-affects');
+    const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
+    infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
+  } else if (hover.className !== 'market-upgrades') {
+    const structureName = hover.getAttribute('data-name');
+    const structure = structures[structureName];
+    const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
+    const { name, baseCost } = structure;
+    infoContainerText.innerText = `> A ${name} generates ${structure.baseGen} bits per second.
+
+    > An additional unit will cost ${baseCost} bits.
+
+    > You currently generate ${gens.toFixed(1)} BpS from them.`;
+  }
+  infoContainer.append(infoContainerText);
+  term.append(infoContainer);
+};
+
 const addNewStructure = (structure) => {
   const bought = structures[structure];
   if (player.bits >= bought.baseCost) {
@@ -377,6 +404,7 @@ const addNewStructure = (structure) => {
       default:
         break;
     }
+    showDetails();
   } else {
     failedNoise();
     alert('You lack the sufficient funds');
@@ -405,33 +433,6 @@ const passiveBitGeneration = () => {
     Math.floor(addBits((structure.baseGen * structure.genMultiplier)));
   });
   titleBits();
-};
-
-const showDetails = (hover) => {
-  const infoContainer = document.createElement('div');
-  infoContainer.className = 'term-info-container';
-  const infoContainerText = document.createElement('p');
-
-  if (hover.attributes.getNamedItem('data-affects') !== null) {
-    const name = hover.getAttribute('alt');
-    const gens = hover.getAttribute('data-multiplier');
-    const cost = hover.getAttribute('data-cost');
-    const affects = hover.getAttribute('data-affects');
-    const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
-    infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
-  } else if (hover.className !== 'market-upgrades') {
-    const structureName = hover.getAttribute('data-name');
-    const structure = structures[structureName];
-    const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
-    const { name, baseCost } = structure;
-    infoContainerText.innerText = `> A ${name} generates ${structure.baseGen} bits per second.
-
-    > An additional unit will cost ${baseCost} bits.
-
-    > You currently generate ${gens.toFixed(1)} BpS from them.`;
-  }
-  infoContainer.append(infoContainerText);
-  term.append(infoContainer);
 };
 
 // Event listeners
