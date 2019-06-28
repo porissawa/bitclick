@@ -8,15 +8,23 @@ Bit Clicker is a game in the tradition of clickers/idle games. You can click the
 [Click here](https://porissawa.github.io/bitclick/src/index.html) to go to the GitHub Pages version of the game!
 
 ## Credits:
-Icons:
+
+### Icons:
+
 Money by henrik lund mikkelsen from the Noun Project
+
 Toaster by Nociconist from the Noun Project (modified for colors)
+
 cellphone by jackie from the Noun Project (modified for colors)
+
 Computer by Iga from the Noun Project (modified for colors)
+
 Server computer by muhammad rosikhan anwar from the Noun Project (modified for colors)
+
 supercomputer by sachin modgekar from the Noun Project (modified for colors)
+
 quantum computing by Andrew Forrester from the Noun Project (modified for colors)
 
-Font:
-[Terminus](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Terminus/font-info.md)
+### Font:
+#### [Terminus](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Terminus/font-info.md)
 ===
