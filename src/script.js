@@ -438,7 +438,7 @@ const showDetails = (hover) => {
     const affects = hover.getAttribute('data-affects');
     const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
     infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
-  } else if (hover.className !== 'market-upgrades') {
+  } else if (hover.attributes.getNamedItem('data-name')) {
     const structureName = hover.getAttribute('data-name');
     const structure = structures[structureName];
     const gens = structure.currOwned * structure.baseGen * structure.genMultiplier;
@@ -651,9 +651,8 @@ marketItems.addEventListener('mouseover', (e) => {
   showDetails(e.target);
 });
 
-marketItems.addEventListener('mouseout', (e) => {
+marketItems.addEventListener('mouseleave', (e) => {
   const infoContainer = term.querySelector('.term-info-container');
-  infoContainer.remove();
   storyLines(countBitsPerSecond());
 });
 
@@ -662,9 +661,8 @@ upgradesDiv.addEventListener('mouseover', (e) => {
   showDetails(e.target);
 });
 
-upgradesDiv.addEventListener('mouseout', (e) => {
+upgradesDiv.addEventListener('mouseleave', (e) => {
   const infoContainer = term.querySelector('.term-info-container');
-  infoContainer.remove();
   storyLines(countBitsPerSecond());
 });
 
