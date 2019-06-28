@@ -37,6 +37,7 @@ const structures = {
     baseCost: 15,
     img: '../assets/imgs/structures_toaster.png',
     currOwned: 0,
+    upgraded: false,
   },
   mobile: {
     name: 'mobile',
@@ -45,6 +46,7 @@ const structures = {
     baseCost: 100,
     img: '../assets/imgs/structure_mobile.png',
     currOwned: 0,
+    upgraded: false,
   },
   computer: {
     name: 'computer',
@@ -53,6 +55,7 @@ const structures = {
     baseCost: 1100,
     img: '../assets/imgs/structures_computer.png',
     currOwned: 0,
+    upgraded: false,
   },
   server: {
     name: 'server',
@@ -61,6 +64,7 @@ const structures = {
     baseCost: 12000,
     img: '../assets/imgs/structures_server.png',
     currOwned: 0,
+    upgraded: false,
   },
   supercomputer: {
     name: 'supercomputer',
@@ -69,6 +73,7 @@ const structures = {
     baseCost: 130000,
     img: '../assets/imgs/structures_supercomputer.png',
     currOwned: 0,
+    upgraded: false,
   },
   quantum: {
     name: 'quantum',
@@ -77,6 +82,7 @@ const structures = {
     baseCost: 1400000,
     img: '../assets/imgs/structures_quantum.png',
     currOwned: 0,
+    upgraded: false,
   },
 };
 
@@ -520,11 +526,17 @@ const addNewUpgrade = (upgrade) => {
     upgrade.setAttribute('hidden', true);
     buyUpgrade();
 
-    player.structures.forEach((structure) => {
-      if (upgrade.getAttribute('data-affects') === structure.name) {
-        structure.genMultiplier *= Number(upgrade.getAttribute('data-multiplier'));
+    player.structures.forEach((el) => {
+      if (upgrade.getAttribute('data-affects') === el.name && el.upgraded === false) {
+        el.genMultiplier *= 2;
+        el.upgraded = true;
       }
     });
+
+    player.structures.forEach((el) => {
+      el.upgraded = false;
+    });
+
   } else {
     failedNoise();
     alert('You lack the sufficient funds.');
