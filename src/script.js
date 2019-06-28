@@ -94,7 +94,7 @@ const upgrades = {
       affects: 'toaster',
       name: 'Toaster II',
       cost: 500,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/azul2.png',
       hasBought: false,
     },
@@ -102,7 +102,7 @@ const upgrades = {
       affects: 'toaster',
       name: 'Toaster III',
       cost: 10000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/azul3.png',
       hasBought: false,
     },
@@ -110,7 +110,7 @@ const upgrades = {
       affects: 'toaster',
       name: 'Toaster IV',
       cost: 100000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/azul4.png',
       hasBought: false,
     },
@@ -128,7 +128,7 @@ const upgrades = {
       affects: 'mobile',
       name: 'Mobile II',
       cost: 5000,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/amarela2.png',
       hasBought: false,
     },
@@ -136,7 +136,7 @@ const upgrades = {
       affects: 'mobile',
       name: 'Mobile III',
       cost: 50000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/amarela3.png',
       hasBought: false,
     },
@@ -144,7 +144,7 @@ const upgrades = {
       affects: 'mobile',
       name: 'Mobile IV',
       cost: 5000000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/amarela4.png',
       hasBought: false,
     },
@@ -162,7 +162,7 @@ const upgrades = {
       affects: 'computer',
       name: 'Computer II',
       cost: 55000,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/pedra2.png',
       hasBought: false,
     },
@@ -170,7 +170,7 @@ const upgrades = {
       affects: 'computer',
       name: 'Computer III',
       cost: 550000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/pedra3.png',
       hasBought: false,
     },
@@ -178,7 +178,7 @@ const upgrades = {
       affects: 'computer',
       name: 'Computer IV',
       cost: 55000000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/pedra4.png',
       hasBought: false,
     },
@@ -196,7 +196,7 @@ const upgrades = {
       affects: 'server',
       name: 'Server II',
       cost: 600000,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/rank2.png',
       hasBought: false,
     },
@@ -204,7 +204,7 @@ const upgrades = {
       affects: 'server',
       name: 'Server III',
       cost: 6000000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/rank3.png',
       hasBought: false,
     },
@@ -212,7 +212,7 @@ const upgrades = {
       affects: 'server',
       name: 'Server IV',
       cost: 600000000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/rank4.png',
       hasBought: false,
     },
@@ -230,7 +230,7 @@ const upgrades = {
       affects: 'supercomputer',
       name: 'Supercomputer II',
       cost: 6500000,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/verde2.png',
       hasBought: false,
     },
@@ -238,7 +238,7 @@ const upgrades = {
       affects: 'supercomputer',
       name: 'Supercomputer III',
       cost: 65000000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/verde3.png',
       hasBought: false,
     },
@@ -246,7 +246,7 @@ const upgrades = {
       affects: 'supercomputer',
       name: 'Supercomputer IV',
       cost: 6500000000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/verde4.png',
       hasBought: false,
     },
@@ -264,7 +264,7 @@ const upgrades = {
       affects: 'quantum',
       name: 'Quantum II',
       cost: 700000000,
-      multiplier: 4,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/quantum2.png',
       hasBought: false,
     },
@@ -272,7 +272,7 @@ const upgrades = {
       affects: 'quantum',
       name: 'Quantum III',
       cost: 7000000000,
-      multiplier: 8,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/quantum3.png',
       hasBought: false,
     },
@@ -280,7 +280,7 @@ const upgrades = {
       affects: 'quantum',
       name: 'Quantum IV',
       cost: 70000000000,
-      multiplier: 16,
+      multiplier: 2,
       src: '../assets/imgs/upgrades/quantum4.png',
       hasBought: false,
     },
@@ -433,11 +433,9 @@ const showDetails = (hover) => {
 
   if (hover.attributes.getNamedItem('data-affects') !== null) {
     const name = hover.getAttribute('alt');
-    const gens = hover.getAttribute('data-multiplier');
     const cost = hover.getAttribute('data-cost');
     const affects = hover.getAttribute('data-affects');
-    const affectsCapitalized = affects.charAt(0).toUpperCase() + affects.slice(1);
-    infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and multiplies ${affectsCapitalized} BpS by ${gens}.`;
+    infoContainerText.innerText = `> Upgrade "${name}" costs ${cost} bits and doubles the BpS your ${affects}s generate.`;
   } else if (hover.attributes.getNamedItem('data-name')) {
     const structureName = hover.getAttribute('data-name');
     const structure = structures[structureName];
@@ -524,7 +522,7 @@ const addNewUpgrade = (upgrade) => {
 
     player.structures.forEach((structure) => {
       if (upgrade.getAttribute('data-affects') === structure.name) {
-        structure.genMultiplier = Number(upgrade.getAttribute('data-multiplier'));
+        structure.genMultiplier *= Number(upgrade.getAttribute('data-multiplier'));
       }
     });
   } else {
