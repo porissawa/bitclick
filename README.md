@@ -12,7 +12,7 @@ Bit Clicker is a game in the tradition of clickers/idle games. You can click the
 ### Icons:
 
 Money by henrik lund mikkelsen from the Noun Project
-
+ 
 Toaster by Nociconist from the Noun Project (modified for colors)
 
 cellphone by jackie from the Noun Project (modified for colors)
