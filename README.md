@@ -9,7 +9,7 @@ Bit Clicker is a game in the tradition of clickers/idle games. You can click the
 
 ## Credits:
 
-Icons:
+### Icons:
 
 Money by henrik lund mikkelsen from the Noun Project
 
@@ -25,6 +25,6 @@ supercomputer by sachin modgekar from the Noun Project (modified for colors)
 
 quantum computing by Andrew Forrester from the Noun Project (modified for colors)
 
-Font:
+### Font:
 #### [Terminus](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Terminus/font-info.md)
 ===
