@@ -1,4 +1,6 @@
 const clickNoise = () => {
+  Tone.Master.volume.value = -10;
+
   const noise = new Tone.NoiseSynth({
     noise: {
       type: 'pink',
@@ -15,7 +17,8 @@ const clickNoise = () => {
 
 const buyUpgrade = () => {
   const reverb = new Tone.JCReverb(0.2).connect(Tone.Master);
-
+  Tone.Master.volume.value = -24;
+  
   const boop = new Tone.Synth({
     oscillator: {
       type: 'sine',
@@ -32,6 +35,9 @@ const buyUpgrade = () => {
 };
 
 const buyNoise = () => {
+
+  Tone.Master.volume.value = 12;
+
   const sound = new Tone.MonoSynth({
     detune: 0.5,
     oscillator: {
@@ -57,13 +63,15 @@ const buyNoise = () => {
       octaves: 12,
       exponent: 2,
     },
-  }).toMaster();
+  }).connect(Tone.Master).toMaster();
 
   sound.triggerAttackRelease('d2', '24n');
 };
 
 
 const failedNoise = () => {
+  Tone.Master.volume.value = -2;
+
   const pluck = new Tone.PluckSynth({
     attackNoise: 2,
     dampening: 1000,
